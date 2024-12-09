@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "16f274dd-3e9d-4b7c-8f53-02aab677885b",
+		"name": "New_API_PetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31069209",
+		"_collection_link": "https://interstellar-escape-238974.postman.co/workspace/Proyecto-Postman~cccf1ca4-8079-4418-a467-2b66b328176c/collection/31069209-16f274dd-3e9d-4b7c-8f53-02aab677885b?action=share&source=collection_link&creator=31069209"
+	},
+	"item": [
+		{
+			"name": "Create_User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validad que la respuesta es exitosa(200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Valida que el Header contenga Date\", function () {\r",
+							"    pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Valida que el tiempo de respuesta sea menor a 700\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(900);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Valida que el nombre del status sea ok\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"string\",\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\",\r\n    \"email\": \"string\",\r\n    \"password\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/createWithList",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"createWithList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonBody = pm.response.json();\r",
+							"\r",
+							"const responseSchema = {\r",
+							"    type: 'object',\r",
+							"    required: [\r",
+							"        'id',\r",
+							"        'firstName',\r",
+							"        'lastName',\r",
+							"        'username',\r",
+							"        'email'\r",
+							"    ],\r",
+							"    properties: {\r",
+							"        id: { type: 'number' },\r",
+							"        firstName: { type: 'string' },\r",
+							"        lastName: { type: 'string' },\r",
+							"        username: { type: 'string' },\r",
+							"        email: { type: 'string' }\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test('Prueba 1: La respuesta coincide con el esquema', () => {\r",
+							"    pm.response.to.have.jsonSchema(responseSchema);\r",
+							"});\r",
+							"\r",
+							"pm.test('Validad que la respuesta es exitosa(200)', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('Valida que el Header contenga Date', function () {\r",
+							"    pm.response.to.have.header('Date');\r",
+							"})\r",
+							"\r",
+							"pm.test('Valida que el tiempo de respuesta sea menor a 700', function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);\r",
+							"})\r",
+							"\r",
+							"pm.test('Valida que el nombre del status sea ok', function () {\r",
+							"    pm.response.to.have.status('OK');\r",
+							"})\r",
+							"\r",
+							"pm.test('Valida que respuesta contenga username', function () {\r",
+							"    pm.expect(pm.response.text()).to.include('username');\r",
+							"})\r",
+							"\r",
+							"pm.test('Valida que respuesta contenga ID', function () {\r",
+							"    pm.expect(pm.response.text()).to.include('id');\r",
+							"})\r",
+							"\r",
+							"pm.test('Prueba: valida que el status es activo', function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.userStatus).to.eql(0);\r",
+							"})\r",
+							"\r",
+							"pm.test('Valida que el header Content-Type', function () {\r",
+							"    pm.response.to.have.header('Content-Type');\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+							"})\r",
+							"\r",
+							"pm.test('Validad que la respuesta es exitosa(200)', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/string",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"string"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
