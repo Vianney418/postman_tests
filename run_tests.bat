@@ -1,1 +1,1 @@
-newman run "C:\Users\viann\Downloads\test\New_API_PetStore.postman_collection.json" -r cli,html --reporter-html-export "C:\Users\viann\Downloads\test\resultados.html"
+"C:\Users\viann\AppData\Roaming\npm\newman" run "C:\Users\viann\Downloads\test\New_API_PetStore.postman_collection.json" -r cli,html --reporter-html-export "C:\Users\viann\Downloads\test\resultados.html"
